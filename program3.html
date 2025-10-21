@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Programs | HustleIn</title>
+    <!-- Load Inter and Poppins Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --bg-main: #F5F7FA;
+            --text-dark: #0F172A;
+            --text-sub: #475569;
+            --gradient-start: #6C63FF; /* Blue-Purple */
+            --gradient-end: #FF6584; /* Pink */
+            --shadow-soft: 0 10px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Define the custom fonts */
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll on animations */
+        }
+
+        /* Custom Gradient Background and Text */
+        .bg-hustle-gradient {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+        }
+
+        .text-hustle-gradient {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card Hover Effect */
+        .program-card {
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .program-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.15); /* Subtle shadow lift */
+        }
+
+        /* Scroll Animation (Fade-in) */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* New Glassmorphism Style */
+        .glass-effect {
+            background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Blur the background */
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            /* Removed border-bottom for cleaner look on a transparent bar */
+        }
+
+        /* Mobile Navbar Menu (Hidden by default) */
+        #mobile-menu {
+            display: none;
+        }
+        
+        /* Chatbot Custom Styling */
+        #chatbot-popup {
+            right: 20px;
+            bottom: 90px;
+            width: 300px;
+            transform: scale(0.9);
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        #chatbot-popup.open {
+            display: block;
+            transform: scale(1);
+        }
+        
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    borderRadius: {
+                        'xl': '12px', /* for buttons */
+                        'card': '24px',
+                        'chat': '16px',
+                    },
+                    colors: {
+                        'primary-dark': 'var(--text-dark)',
+                        'sub-text': 'var(--text-sub)',
+                        'accent-start': 'var(--gradient-start)',
+                        'accent-end': 'var(--gradient-end)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Sticky Navbar (Transparent with Glassmorphism) -->
+    <header class="sticky top-0 z-40 glass-effect shadow-md">
+        <!-- Added 'relative' to make absolute positioning of the centered nav work correctly -->
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center relative">
+            
+            <!-- Logo Area (Black on Navbar - Left side) -->
+            <a href="#" class="text-2xl font-poppins font-extrabold z-10">
+                <!-- Applied text-primary-dark for black color -->
+                <span class="text-primary-dark">Hustle</span><span class="text-primary-dark">In</span>
+            </a>
+
+            <!-- Navigation Links (CENTERED) -->
+            <!-- Uses absolute inset-x-0 and justify-center to center the links horizontally -->
+            <nav class="hidden md:flex absolute inset-x-0 justify-center">
+                <div class="flex items-center space-x-5 lg:space-x-6">
+                    <a href="index2.html" class="text-primary-dark hover:text-accent-start font-medium">Home</a>
+                    <a href="about3.html" class="text-primary-dark hover:text-accent-start font-medium">About</a>
+                    <a href="program3.html" class="text-primary-dark font-bold text-accent-end">Programs</a>
+                    <a href="events1.html" class="text-primary-dark hover:text-accent-start font-medium">Events</a>
+                    <a href="educators1.html" class="text-primary-dark hover:text-accent-start font-medium">For Educators</a>
+                </div>
+            </nav>
+
+            <!-- Login/Register Buttons (Right side) -->
+            <div class="hidden md:flex items-center space-x-3 z-10">
+                <a href="#" class="text-primary-dark hover:text-accent-start font-medium px-3 py-1.5 rounded-xl border border-transparent hover:border-accent-start transition duration-200">Login</a>
+                <a href="#" class="bg-hustle-gradient text-white px-4 py-1.5 rounded-xl font-semibold shadow-md shadow-[rgba(108,99,255,0.2)] hover:opacity-90 transition duration-200">Register</a>
+            </div>
+
+            <!-- Mobile Menu Button (Hamburger) - Remains visible on mobile -->
+            <button id="mobile-menu-btn" class="md:hidden text-primary-dark p-2 rounded-md hover:bg-gray-100">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Glassmorphic) -->
+        <div id="mobile-menu" class="absolute w-full glass-effect md:hidden py-4 border-t border-gray-100">
+            <nav class="flex flex-col space-y-3 px-4">
+                <a href="index2.html" class="text-primary-dark hover:text-accent-start font-medium border-b pb-2">Home</a>
+                <a href="about3.html" class="text-primary-dark hover:text-accent-start font-medium border-b pb-2">About</a>
+                <a href="program3.html" class="text-primary-dark font-bold text-accent-end border-b pb-2">Programs</a>
+                <a href="events1.html" class="text-primary-dark hover:text-accent-start font-medium border-b pb-2">Events</a>
+                <a href="educators1.html" class="text-primary-dark hover:text-accent-start font-medium border-b pb-2">For Educators</a>
+                
+                <!-- Extra links for mobile -->
+                <a href="#" class="text-primary-dark hover:text-accent-start font-medium border-b pb-2">Contact</a>
+                <a href="#" class="text-primary-dark hover:text-accent-start font-medium border-b pb-2">Login</a>
+                <a href="#" class="bg-hustle-gradient text-white text-center px-5 py-2.5 rounded-xl font-semibold mt-4">Join Now</a>
+                <a href="#" class="bg-hustle-gradient text-white text-center px-5 py-2.5 rounded-xl font-semibold mt-2">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center fade-in-section">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="font-poppins text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4 text-hustle-gradient">
+                    Explore Our Power-Packed Learning Programs 🚀
+                </h1>
+                <p class="text-xl max-w-3xl mx-auto" style="color: var(--text-sub);">
+                    From zero to career-ready — every skill that shapes the next generation of leaders. Define your path, master your craft, and **start building your future, today.**
+                </p>
+                
+                <!-- Centered CTA button -->
+                <a href="#" class="bg-hustle-gradient text-white px-8 py-4 mt-8 inline-block rounded-xl text-lg font-bold shadow-lg shadow-[rgba(108,99,255,0.3)] hover:scale-[1.05] transition duration-300">
+                    Start Your Hustle →
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. Main Section: Our Programs Grid -->
+        <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="font-poppins text-3xl sm:text-4xl font-extrabold text-center mb-12 fade-in-section" style="color: var(--text-dark);">
+                Our Program Catalogue
+            </h2>
+            
+            <div id="programs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Program Cards will be generated here by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- 3. Motivational Quote Section -->
+        <section class="py-16 mt-16 bg-hustle-gradient text-white text-center fade-in-section">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="font-poppins text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                    <i data-lucide="zap" class="w-8 h-8 inline-block mr-3"></i> 
+                    Greatness doesn’t happen by chance — it happens by Hustle.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 4. Footer (Dark) -->
+    <footer class="bg-[#1E293B] pt-12 pb-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                
+                <!-- HustleIn Info -->
+                <div class="col-span-2 md:col-span-1 space-y-3">
+                    <a href="#" class="text-2xl font-poppins font-extrabold text-white">
+                        <!-- Applied text-white for white color in footer -->
+                        <span class="text-white">Hustle</span><span class="text-white">In</span>
+                    </a>
+                    <p class="text-sm text-slate-400">Empowering students to learn, earn, and lead in the digital era.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-white">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-accent-end">Home</a></li>
+                        <li><a href="#" class="hover:text-accent-end">Programs</a></li>
+                        <li><a href="#" class="hover:text-accent-end">Internship</a></li>
+                        <li><a href="#" class="hover:text-accent-end">Join Now</a></li>
+                    </ul>
+                </div>
+
+                <!-- Follow Us -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-white">Follow Us</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-accent-end flex items-center"><i data-lucide="instagram" class="w-4 h-4 mr-2"></i> Instagram</a></li>
+                        <li><a href="#" class="hover:text-accent-end flex items-center"><i data-lucide="linkedin" class="w-4 h-4 mr-2"></i> LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-accent-end flex items-center"><i data-lucide="youtube" class="w-4 h-4 mr-2"></i> YouTube</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-white">Contact</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="mailto:support@hustlein.in" class="hover:text-accent-end">support@hustlein.in</a></li>
+                        <li><a href="tel:+919341403106" class="hover:text-accent-end">+91 93414 03106</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-slate-700 text-center text-xs text-slate-400">
+                © 2025 HustleIn. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- 5. Floating Chat Assistant (HustleBot) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <!-- Chat Button -->
+        <button id="chat-button" class="p-4 rounded-full shadow-xl bg-hustle-gradient text-white hover:scale-110 transition-transform duration-300">
+            <i data-lucide="message-square-text" class="w-7 h-7"></i>
+        </button>
+
+        <!-- Chat Popup (Glassmorphic) -->
+        <div id="chatbot-popup" class="absolute glass-effect rounded-chat shadow-2xl p-4 border border-gray-100">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-poppins text-xl font-bold text-hustle-gradient">Ask HustleBot 💬</h3>
+                <button id="close-chat-btn" class="text-primary-dark hover:text-accent-end p-1 rounded-full"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <p class="text-sm mb-4" style="color: var(--text-sub);">Need guidance? I’m HustleBot — your personal career motivator. How can I help you hustle?</p>
+            <div class="w-full h-8 bg-gray-100 rounded-lg flex items-center px-3 text-sm text-sub-text">
+                Type your question...
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            // --- Program Data ---
+            const programs = [
+                { title: "Web Development", icon: "code", desc: "Build the future of the internet — code, create, and craft digital experiences that inspire." },
+                { title: "Graphic Designing", icon: "paintbrush", desc: "Turn imagination into visuals — design with purpose, impact with creativity." },
+                { title: "Finance Management", icon: "wallet", desc: "Master the art of money — manage, grow, and multiply wealth with smart decisions." },
+                { title: "Social Media Marketing", icon: "megaphone", desc: "Make brands go viral — learn the psychology behind trends, engagement, and influence." },
+                { title: "Digital Marketing", icon: "line-chart", desc: "Learn how to sell ideas, not just products — own the digital space with strategy and passion." },
+                { title: "Dropshipping", icon: "package-open", desc: "Build your online empire — learn how to earn while you sleep with zero inventory." },
+                { title: "Agentic AI", icon: "cpu", desc: "Step into the AI revolution — create intelligent systems that think, act, and perform." },
+                { title: "Project Management", icon: "clipboard-check", desc: "Lead with clarity and confidence — turn chaos into completion." },
+                { title: "Content Creation", icon: "pencil-line", desc: "Words, visuals, voice — become the storyteller brands can’t live without." },
+                { title: "Business Psychology", icon: "brain", desc: "Decode minds, influence decisions — the science of winning hearts and markets." },
+            ];
+
+            const grid = document.getElementById('programs-grid');
+
+            // Function to create a program card
+            const createCard = (program) => {
+                const card = document.createElement('div');
+                card.className = 'program-card bg-white p-6 rounded-card shadow-lg hover:z-10 fade-in-section';
+                card.innerHTML = `
+                    <div class="p-3 inline-block rounded-full mb-4" style="background-color: ${program.icon === 'cpu' ? 'rgba(108, 99, 255, 0.1)' : 'rgba(255, 101, 132, 0.1)'}">
+                        <i data-lucide="${program.icon}" class="w-6 h-6" style="color: ${program.icon === 'cpu' ? 'var(--gradient-start)' : 'var(--gradient-end)'};"></i>
+                    </div>
+                    <h3 class="font-poppins text-xl font-bold mb-3" style="color: var(--text-dark);">${program.title}</h3>
+                    <p class="text-base mb-6" style="color: var(--text-sub);">${program.desc}</p>
+                    <a href="#" class="bg-hustle-gradient text-white px-4 py-2 text-sm rounded-xl font-semibold hover:opacity-90 transition duration-200">
+                        Learn More
+                    </a>
+                `;
+                grid.appendChild(card);
+            };
+
+            programs.forEach(createCard);
+            lucide.createIcons(); // Initialize icons for dynamically created cards
+
+
+            // --- Navbar Mobile Toggle ---
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+
+            // --- Chatbot Toggle ---
+            const chatButton = document.getElementById('chat-button');
+            const chatPopup = document.getElementById('chatbot-popup');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+
+            chatButton.addEventListener('click', () => {
+                chatPopup.classList.toggle('open');
+                console.log("HustleBot opened.");
+            });
+            
+            closeChatBtn.addEventListener('click', () => {
+                chatPopup.classList.remove('open');
+            });
+
+
+            // --- Scroll Animation (Intersection Observer) ---
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            // Apply observer to all elements with the 'fade-in-section' class
+            document.querySelectorAll('.fade-in-section').forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Apply observer to all program cards to stagger appearance
+            document.querySelectorAll('.program-card').forEach((element, index) => {
+                element.style.transitionDelay = `${index * 50}ms`; // Slight delay for staggered effect
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

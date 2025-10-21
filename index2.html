@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hustle In — Learn. Earn. Build.</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom styles for fonts and animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F7FA;
+            color: #0F172A;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(90deg, #6A11CB 0%, #2575FC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Testimonial Auto-Scroll */
+        .scroller {
+            max-width: 100%;
+        }
+        .scroller-inner {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+        @keyframes scroll {
+            to {
+                transform: translate(calc(-50% - 0.75rem));
+            }
+        }
+        
+        /* Section fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar for events */
+        .horizontal-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .horizontal-scrollbar::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+        .horizontal-scrollbar::-webkit-scrollbar-thumb {
+            background-image: linear-gradient(45deg, #6A11CB, #2575FC);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold font-poppins text-slate-800">Hustle In</a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="about3.html" class="text-slate-600 hover:text-blue-500 transition-colors">About</a>
+                    <a href="program3.html" class="text-slate-600 hover:text-blue-500 transition-colors">Programs</a>
+                    <a href="events1.html" class="text-slate-600 hover:text-blue-500 transition-colors">Events</a>
+                    <a href="educators1.html" class="text-slate-600 hover:text-blue-500 transition-colors">For Educators</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-4">
+                    <button id="loginBtn" class="text-slate-600 font-semibold">Login</button>
+                    <button id="registerBtn" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold px-6 py-2 rounded-full shadow-lg hover:scale-105 transform transition-transform duration-300">
+                        Register
+                    </button>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button">
+                        <i data-lucide="menu" class="w-6 h-6 text-slate-800"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/80 backdrop-blur-lg">
+            <a href="about3.html" class="block py-2 px-6 text-slate-600 hover:bg-gray-100">About</a>
+            <a href="program3.html" class="block py-2 px-6 text-slate-600 hover:bg-gray-100">Programs</a>
+            <a href="events1.html" class="block py-2 px-6 text-slate-600 hover:bg-gray-100">Events</a>
+            <a href="educators1.html" class="block py-2 px-6 text-slate-600 hover:bg-gray-100">For Educators</a>
+            <div class="px-6 py-4 border-t border-gray-200">
+                 <button class="w-full mb-2 text-slate-600 font-semibold py-2 rounded-full border border-slate-300">Login</button>
+                 <button class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold px-6 py-2 rounded-full shadow-lg">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-100 via-blue-50 to-white -z-10"></div>
+            <div class="absolute top-0 left-0 w-72 h-72 bg-purple-200 rounded-full opacity-30 blur-2xl animate-pulse"></div>
+            <div class="absolute bottom-0 right-0 w-72 h-72 bg-blue-200 rounded-full opacity-30 blur-2xl animate-pulse animation-delay-4000"></div>
+
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-7xl font-extrabold font-poppins text-slate-900 leading-tight">
+                    <span class="gradient-text">Learn. Earn. Build.</span>
+                    <br>
+                    Your Future Starts Here.
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-slate-600">
+                    Empowering youth (14–25) to learn trending skills, gain experience, and innovate their future.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#programs" class="group w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
+                        Start Learning <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#" class="group w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-slate-700 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300 border border-slate-200">
+                        Join as Freelancer <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Floating Icons -->
+            <div class="absolute top-1/4 left-10 w-16 h-16 opacity-50 animate-float" style="animation-delay: 0s;"><img src="https://placehold.co/100x100/A855F7/FFFFFF?text=🏆&font=noto" class="rounded-2xl shadow-lg transform -rotate-12"></div>
+            <div class="absolute top-1/2 right-12 w-20 h-20 opacity-60 animate-float" style="animation-delay: 1s;"><img src="https://placehold.co/100x100/3B82F6/FFFFFF?text=💻&font=noto" class="rounded-2xl shadow-lg transform rotate-12"></div>
+            <div class="absolute bottom-1/4 left-1/4 w-12 h-12 opacity-40 animate-float" style="animation-delay: 2s;"><img src="https://placehold.co/100x100/EC4899/FFFFFF?text=🚀&font=noto" class="rounded-2xl shadow-lg"></div>
+        </section>
+
+        <!-- 2. About Section -->
+        <section id="about" class="py-20 fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Who We Are</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-slate-600 text-lg">
+                    To create an ecosystem where every young person can <span class="font-semibold text-purple-600">learn</span>, <span class="font-semibold text-blue-600">earn</span>, and <span class="font-semibold text-pink-500">innovate</span> — all from one platform.
+                </p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Learn Card -->
+                    <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100">
+                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto">
+                            <i data-lucide="book-open" class="w-8 h-8 text-purple-600"></i>
+                        </div>
+                        <h3 class="mt-6 text-2xl font-bold text-slate-800">Learn</h3>
+                        <p class="mt-2 text-slate-500">Master in-demand skills with expert-led courses and real-world projects.</p>
+                    </div>
+                    <!-- Earn Card -->
+                    <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto">
+                            <i data-lucide="dollar-sign" class="w-8 h-8 text-blue-600"></i>
+                        </div>
+                        <h3 class="mt-6 text-2xl font-bold text-slate-800">Earn</h3>
+                        <p class="mt-2 text-slate-500">Find freelance gigs, internships, and job opportunities with top companies.</p>
+                    </div>
+                    <!-- Innovate Card -->
+                    <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-100">
+                        <div class="w-16 h-16 bg-pink-100 rounded-2xl flex items-center justify-center mx-auto">
+                           <i data-lucide="lightbulb" class="w-8 h-8 text-pink-500"></i>
+                        </div>
+                        <h3 class="mt-6 text-2xl font-bold text-slate-800">Innovate</h3>
+                        <p class="mt-2 text-slate-500">Launch your own startup with our ideathons, mentorship, and funding support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Our Programs / Ecosystem Section -->
+        <section id="programs" class="py-20 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Our Ecosystem</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-600 text-lg">
+                        A complete suite of programs designed for your growth and success.
+                    </p>
+                </div>
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- Program Cards -->
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="layers-3" class="w-10 h-10 mx-auto text-purple-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Skill Learning</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="briefcase" class="w-10 h-10 mx-auto text-blue-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Career Training</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="rocket" class="w-10 h-10 mx-auto text-pink-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Startup Ideathon</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="building" class="w-10 h-10 mx-auto text-purple-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Corporate Hiring</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="codesandbox" class="w-10 h-10 mx-auto text-blue-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Freelancer Hub</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="graduation-cap" class="w-10 h-10 mx-auto text-pink-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Educator Program</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="code" class="w-10 h-10 mx-auto text-purple-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Hackathons</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="compass" class="w-10 h-10 mx-auto text-blue-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Foundation Courses</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="trophy" class="w-10 h-10 mx-auto text-pink-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Competitions</h4>
+                    </div>
+                    <div class="group relative p-6 bg-slate-50 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-xl">
+                        <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 rounded-2xl transition-all duration-300"></div>
+                        <i data-lucide="message-square-plus" class="w-10 h-10 mx-auto text-purple-500"></i>
+                        <h4 class="mt-4 font-semibold text-slate-700">Helpdesk Marketplace</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Why Choose Us / Impact Section -->
+        <section class="py-20 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Our Impact in Numbers</h2>
+                        <p class="mt-4 text-slate-600 text-lg">We are proud to have created a real impact in the lives of thousands of young hustlers across the country.</p>
+                        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-4xl font-bold gradient-text" data-target="20000">0+</h3>
+                                <p class="mt-2 text-slate-500 font-semibold">Students Empowered</p>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl font-bold gradient-text" data-target="1000">0+</h3>
+                                <p class="mt-2 text-slate-500 font-semibold">Jobs Created</p>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl font-bold gradient-text" data-target="50">0+</h3>
+                                <p class="mt-2 text-slate-500 font-semibold">Startups Funded</p>
+                            </div>
+                            <div>
+                                <h3 class="text-4xl font-bold gradient-text" data-target="500">0+</h3>
+                                <p class="mt-2 text-slate-500 font-semibold">Hiring Partners</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-6 rounded-3xl shadow-lg text-center transform rotate-6">
+                            <i data-lucide="award" class="w-12 h-12 text-yellow-500 mx-auto"></i><p class="mt-2 font-semibold">Certificates</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl shadow-lg text-center transform -rotate-3 mt-8">
+                           <i data-lucide="coins" class="w-12 h-12 text-green-500 mx-auto"></i><p class="mt-2 font-semibold">Earnings</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl shadow-lg text-center transform -rotate-4">
+                           <i data-lucide="rocket" class="w-12 h-12 text-pink-500 mx-auto"></i><p class="mt-2 font-semibold">Startups</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl shadow-lg text-center transform rotate-3 mt-8">
+                           <i data-lucide="briefcase" class="w-12 h-12 text-blue-500 mx-auto"></i><p class="mt-2 font-semibold">Jobs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Community / Events Section -->
+        <section id="events" class="py-20 bg-white fade-in-section overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Join Our Thriving Community</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-600 text-lg">
+                        Participate in hackathons, ideathons, and tech fests to showcase your skills and win amazing prizes.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-12 w-full">
+                <div class="flex gap-6 px-6 horizontal-scrollbar overflow-x-auto pb-6">
+                    <!-- Event Cards -->
+                    <div class="group flex-shrink-0 w-80 md:w-96 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <div class="relative">
+                            <img src="https://placehold.co/400x250/6A11CB/FFFFFF?text=Hackathon" alt="Hackathon" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white text-2xl font-bold">QuantumVerse Hackathon</h3>
+                                <span class="text-white/80 text-sm">Online | 25th Oct</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white">
+                           <p class="text-slate-600">Build the future of Web3 and AI. Prizes worth $10,000.</p>
+                           <button class="mt-4 w-full bg-pink-500 text-white font-semibold py-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Register Now</button>
+                        </div>
+                    </div>
+                    <div class="group flex-shrink-0 w-80 md:w-96 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <div class="relative">
+                            <img src="https://placehold.co/400x250/2575FC/FFFFFF?text=Ideathon" alt="Ideathon" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white text-2xl font-bold">Innovate India Ideathon</h3>
+                                <span class="text-white/80 text-sm">Virtual | 15th Nov</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white">
+                           <p class="text-slate-600">Pitch your startup idea and get a chance to win seed funding.</p>
+                           <button class="mt-4 w-full bg-pink-500 text-white font-semibold py-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Register Now</button>
+                        </div>
+                    </div>
+                    <div class="group flex-shrink-0 w-80 md:w-96 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <div class="relative">
+                            <img src="https://placehold.co/400x250/FF007A/FFFFFF?text=Tech+Fest" alt="Tech Fest" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white text-2xl font-bold">CyberStorm Tech Fest</h3>
+                                <span class="text-white/80 text-sm">Offline | 1st Dec</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white">
+                           <p class="text-slate-600">A grand celebration of technology, with workshops and competitions.</p>
+                           <button class="mt-4 w-full bg-pink-500 text-white font-semibold py-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Register Now</button>
+                        </div>
+                    </div>
+                    <div class="group flex-shrink-0 w-80 md:w-96 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <div class="relative">
+                            <img src="https://placehold.co/400x250/4ade80/FFFFFF?text=Workshop" alt="Workshop" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute bottom-0 p-4">
+                                <h3 class="text-white text-2xl font-bold">AI/ML Bootcamp</h3>
+                                <span class="text-white/80 text-sm">Online | Every Weekend</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white">
+                           <p class="text-slate-600">Deep dive into Artificial Intelligence with hands-on projects.</p>
+                           <button class="mt-4 w-full bg-pink-500 text-white font-semibold py-2 rounded-full opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Corporate & Partner Section -->
+        <section class="py-20 bg-slate-900 bg-gradient-to-br from-slate-900 to-slate-800 text-white fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold">Hire Pre-Tested Skilled Youth for ₹1000 / 10 Hires.</h2>
+                <p class="mt-4 text-slate-300 max-w-2xl mx-auto">Access a pool of verified, project-ready talent and build your dream team.</p>
+                <a href="#" class="mt-8 inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-full shadow-lg hover:scale-105 transform transition-transform duration-300">
+                    Partner With Us
+                </a>
+                <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center opacity-60">
+                    <img src="https://placehold.co/150x50/FFFFFF/CCCCCC?text=Partner+1" alt="Partner logo" class="mx-auto" />
+                    <img src="https://placehold.co/150x50/FFFFFF/CCCCCC?text=Partner+2" alt="Partner logo" class="mx-auto" />
+                    <img src="https://placehold.co/150x50/FFFFFF/CCCCCC?text=Partner+3" alt="Partner logo" class="mx-auto" />
+                    <img src="https://placehold.co/150x50/FFFFFF/CCCCCC?text=Partner+4" alt="Partner logo" class="mx-auto" />
+                    <img src="https://placehold.co/150x50/FFFFFF/CCCCCC?text=Partner+5" alt="Partner logo" class="mx-auto" />
+                    <img src="https://placehold.co/150x50/FFFFFF/CCCCCC?text=Partner+6" alt="Partner logo" class="mx-auto" />
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Educator Program -->
+        <section id="educators" class="py-20 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-8 md:p-12 lg:p-16 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text">Teach. Inspire. Earn.</h2>
+                    <p class="mt-4 text-slate-600 text-lg max-w-2xl mx-auto">Join our mission to empower the next generation. Become a certified Hustle In educator.</p>
+                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-left">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-white text-purple-600 font-bold text-2xl w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full shadow-md">1</div>
+                            <div><h4 class="font-semibold text-slate-800">Apply</h4><p class="text-sm text-slate-500">Submit your profile</p></div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-white text-purple-600 font-bold text-2xl w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full shadow-md">2</div>
+                            <div><h4 class="font-semibold text-slate-800">Train</h4><p class="text-sm text-slate-500">Get trained by experts</p></div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-white text-purple-600 font-bold text-2xl w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full shadow-md">3</div>
+                            <div><h4 class="font-semibold text-slate-800">Get Certified</h4><p class="text-sm text-slate-500">Become a verified educator</p></div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-white text-purple-600 font-bold text-2xl w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full shadow-md">4</div>
+                            <div><h4 class="font-semibold text-slate-800">Start Teaching</h4><p class="text-sm text-slate-500">Inspire young minds</p></div>
+                        </div>
+                    </div>
+                     <a href="#" class="mt-10 inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:scale-105 transform transition-transform duration-300">
+                        Apply as Educator
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Testimonials -->
+        <section class="py-20 bg-white fade-in-section overflow-hidden">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Loved by Hustlers</h2>
+                 <p class="mt-4 max-w-2xl mx-auto text-slate-600 text-lg">
+                    See what our community members have to say about their journey with us.
+                </p>
+            </div>
+            <div class="mt-12 scroller" x-data="{}" x-init="$el.setAttribute('data-animated', true)">
+                <div class="scroller-inner">
+                    <!-- Testimonial Cards -->
+                    <div class="w-80 flex-shrink-0 bg-slate-50 rounded-3xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/60x60/a3e635/FFFFFF/png" class="w-14 h-14 rounded-full" alt="User Avatar">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Priya Sharma</h4>
+                                <p class="text-sm text-slate-500">AI/ML Course</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-slate-600">"Hustle In helped me land my first internship. The practical skills I learned were invaluable!"</p>
+                    </div>
+                    <div class="w-80 flex-shrink-0 bg-slate-50 rounded-3xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/60x60/f87171/FFFFFF/png" class="w-14 h-14 rounded-full" alt="User Avatar">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Rohan Mehta</h4>
+                                <p class="text-sm text-slate-500">Startup Ideathon Winner</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-slate-600">"The mentorship I received was top-notch. We're now a funded startup, all thanks to this platform."</p>
+                    </div>
+                    <div class="w-80 flex-shrink-0 bg-slate-50 rounded-3xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/60x60/60a5fa/FFFFFF/png" class="w-14 h-14 rounded-full" alt="User Avatar">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Aisha Khan</h4>
+                                <p class="text-sm text-slate-500">Freelance Developer</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-slate-600">"The freelancer hub is amazing. I'm earning a steady income while still in college."</p>
+                    </div>
+                    <div class="w-80 flex-shrink-0 bg-slate-50 rounded-3xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/60x60/fbbf24/FFFFFF/png" class="w-14 h-14 rounded-full" alt="User Avatar">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Vikram Singh</h4>
+                                <p class="text-sm text-slate-500">UI/UX Design Course</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-slate-600">"The courses are so engaging and up-to-date with industry trends. Highly recommended!"</p>
+                    </div>
+                    <!-- Duplicated for seamless scroll -->
+                     <div class="w-80 flex-shrink-0 bg-slate-50 rounded-3xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/60x60/a3e635/FFFFFF/png" class="w-14 h-14 rounded-full" alt="User Avatar">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Priya Sharma</h4>
+                                <p class="text-sm text-slate-500">AI/ML Course</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-slate-600">"Hustle In helped me land my first internship. The practical skills I learned were invaluable!"</p>
+                    </div>
+                    <div class="w-80 flex-shrink-0 bg-slate-50 rounded-3xl p-6 shadow-lg">
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/60x60/f87171/FFFFFF/png" class="w-14 h-14 rounded-full" alt="User Avatar">
+                            <div>
+                                <h4 class="font-bold text-slate-800">Rohan Mehta</h4>
+                                <p class="text-sm text-slate-500">Startup Ideathon Winner</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-slate-600">"The mentorship I received was top-notch. We're now a funded startup, all thanks to this platform."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Call-to-Action Banner -->
+        <section class="py-20 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="relative bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-12 text-center text-white overflow-hidden">
+                    <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-white/10 rounded-full"></div>
+                    <div class="absolute -top-12 -left-12 w-48 h-48 bg-white/10 rounded-full"></div>
+                    <h2 class="text-4xl md:text-5xl font-bold">Join the Revolution of Youth Empowerment 🚀</h2>
+                    <p class="mt-4 text-lg text-white/80 max-w-xl mx-auto">Your journey to success starts with a single step. Are you ready to take it?</p>
+                    <a href="#" class="mt-8 inline-block bg-white text-blue-600 font-semibold px-10 py-4 rounded-full shadow-lg hover:scale-105 transform transition-transform duration-300">
+                        Start Your Journey
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 10. Footer -->
+    <footer class="bg-slate-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold font-poppins">Hustle In</h3>
+                    <p class="mt-2 text-slate-400">Learn. Earn. Innovate.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-slate-200">Quick Links</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#about" class="text-slate-400 hover:text-white">About Us</a></li>
+                        <li><a href="#programs" class="text-slate-400 hover:text-white">Courses</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white">Hire Talent</a></li>
+                        <li><a href="#events" class="text-slate-400 hover:text-white">Events</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-slate-200">Legal</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-slate-200">Newsletter</h4>
+                    <p class="mt-4 text-slate-400">Stay updated with our latest programs and events.</p>
+                    <div class="mt-4 flex">
+                        <input type="email" placeholder="Enter your email" class="w-full rounded-l-full py-2 px-4 text-slate-800 outline-none">
+                        <button class="bg-blue-600 px-4 rounded-r-full hover:bg-blue-700">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-slate-700 text-center text-slate-500 text-sm">
+                © 2025 Hustle In | Learn. Earn. Innovate.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Assistant -->
+    <button class="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform duration-300">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </button>
+
+    <!-- Login / Register Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8 relative">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 id="modalTitle" class="text-2xl font-bold text-center text-slate-800 mb-2">Welcome Back!</h2>
+            <p class="text-center text-slate-500 mb-6">Login to continue your journey.</p>
+            
+            <form>
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-slate-600 mb-1">Email Address</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-slate-600 mb-1">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-3 rounded-lg shadow-md hover:scale-105 transition-transform">
+                    Continue
+                </button>
+            </form>
+            <p id="modalSwitchText" class="text-center text-sm text-slate-500 mt-6">
+                Don't have an account? <a href="#" class="font-semibold text-blue-600">Register now</a>
+            </p>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Sticky Navbar
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white/80', 'backdrop-blur-lg', 'shadow-sm');
+                } else {
+                    navbar.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-sm');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Counter Animation
+            const counters = document.querySelectorAll('[data-target]');
+            const speed = 200; // The lower the slower
+
+            const animateCounter = (counter) => {
+                const target = +counter.getAttribute('data-target');
+                const updateCount = () => {
+                    const count = +counter.innerText.replace('+', '');
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc) + '+';
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target.toLocaleString() + '+';
+                    }
+                };
+                updateCount();
+            };
+            
+            // Section Fade-in Animation on Scroll
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // Check if the intersecting element is the impact section and trigger counters
+                        const counterElements = entry.target.querySelectorAll('[data-target]');
+                        if (counterElements.length > 0) {
+                            counterElements.forEach(animateCounter);
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+             // Modal Logic
+            const authModal = document.getElementById('authModal');
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSwitchText = document.getElementById('modalSwitchText');
+
+            const openModal = (type) => {
+                if (type === 'login') {
+                    modalTitle.textContent = 'Welcome Back!';
+                    modalSwitchText.innerHTML = `Don't have an account? <a href="#" class="font-semibold text-blue-600">Register now</a>`;
+                } else {
+                    modalTitle.textContent = 'Create Your Account';
+                    modalSwitchText.innerHTML = `Already have an account? <a href="#" class="font-semibold text-blue-600">Login here</a>`;
+                }
+                authModal.classList.remove('hidden');
+            };
+
+            const closeModal = () => {
+                authModal.classList.add('hidden');
+            };
+
+            loginBtn.addEventListener('click', () => openModal('login'));
+            registerBtn.addEventListener('click', () => openModal('register'));
+            closeModalBtn.addEventListener('click', closeModal);
+
+            // Close modal on outside click
+            authModal.addEventListener('click', (e) => {
+                if (e.target === authModal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
