@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | Learn. Compete. Launch. | HustleIn</title>
+    <!-- Load Inter and Poppins Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* --- BRAND SYSTEM COLORS & VARIABLES --- */
+        :root {
+            --bg-base: #F5F7FA;
+            --text-heading: #0F172A;
+            --text-body: #334155;
+            --accent-neon: #FF007A;
+            --gradient-start: #6A11CB; /* Primary Purple */
+            --gradient-end: #2575FC;  /* Primary Blue */
+        }
+
+        /* Define the custom fonts */
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Gradient Utility Classes */
+        .bg-hustle-gradient {
+            background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+        }
+
+        .text-hustle-gradient {
+            background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- GLASSMORPHISM CORE --- */
+        .glass-effect {
+            /* Glassmorphic card surface: rgba(255,255,255,0.65) + backdrop-filter: blur(10px) + very soft border 1px solid rgba(15,23,42,0.06) and drop shadow 0 8px 30px rgba(15,23,42,0.06) */
+            background-color: rgba(255, 255, 255, 0.65); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* --- NAVBAR SPECIFIC GLASS --- */
+        .nav-glass {
+            background-color: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+            height: 72px;
+        }
+        @media (max-width: 767px) {
+            .nav-glass { height: 60px; }
+        }
+
+        /* --- HERO BACKGROUND BLOB EFFECT --- */
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before, .hero-bg::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            z-index: -1;
+            filter: blur(100px);
+        }
+        /* Purple Blob */
+        .hero-bg::before {
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(106, 17, 203, 0.06); 
+        }
+        /* Blue Blob */
+        .hero-bg::after {
+            bottom: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background-color: rgba(37, 117, 252, 0.05); 
+        }
+
+        /* Scroll Animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Navbar Menu (Hidden by default) */
+        #mobile-menu {
+            display: none;
+        }
+        
+        /* Chatbot Custom Styling */
+        #chatbot-popup {
+            right: 20px;
+            bottom: 90px;
+            width: 300px;
+            transform: scale(0.9);
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        #chatbot-popup.open {
+            display: block;
+            transform: scale(1);
+        }
+        
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    borderRadius: {
+                        'xl': '12px', 
+                        'card': '28px', /* Default rounded corners: 28px */
+                        'btn-full': '30px', /* For Register button */
+                    },
+                    colors: {
+                        'h-dark': 'var(--text-heading)',
+                        'h-body': 'var(--text-body)',
+                        'h-neon': 'var(--accent-neon)',
+                        'h-base': 'var(--bg-base)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-inter">
+
+    <!-- Sticky Navbar (Glassmorphic) -->
+    <header class="sticky top-0 z-50 nav-glass">
+        <!-- Main Navbar Container -->
+        <div class="container mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center relative">
+            
+            <!-- Logo Area (Left) -->
+            <a href="#" class="text-2xl font-poppins font-bold text-h-dark z-10">
+                HustleIn
+            </a>
+
+            <!-- Navigation Links (CENTERED - Desktop Only) -->
+            <nav class="hidden md:flex absolute inset-x-0 justify-center h-full">
+                <div class="flex items-center space-x-6 lg:space-x-8 text-sm uppercase">
+                    <a href="index2.html" class="text-h-body hover:text-h-dark font-medium transition duration-200">Home</a>
+                    <a href="about3.html" class="text-h-body hover:text-h-dark font-medium transition duration-200">About</a>
+                    <a href="program3.html" class="text-h-body hover:text-h-dark font-medium transition duration-200">Programs</a>
+                    <!-- Active Link -->
+                    <a href="events1.html" class="text-h-dark font-bold border-b-2 border-h-neon pb-1">Events</a>
+                    <a href="educators1.html" class="text-h-body hover:text-h-dark font-medium transition duration-200">For Educators</a>
+                </div>
+            </nav>
+
+            <!-- Action Buttons (Right) -->
+            <div class="hidden md:flex items-center space-x-4 z-10">
+                <a href="#" class="text-h-body hover:text-h-dark font-medium transition duration-200">Login</a>
+                <a href="#" class="bg-hustle-gradient text-white px-5 py-2 rounded-btn-full font-bold shadow-lg shadow-[rgba(37,117,252,0.12)] hover:scale-[1.03] transition duration-300">
+                    Register
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-btn" class="md:hidden text-h-dark p-2 rounded-md hover:bg-gray-100" aria-label="Toggle navigation menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Glassmorphic) -->
+        <div id="mobile-menu" class="absolute w-full glass-effect md:hidden py-4 border-t border-gray-100" role="menu" aria-expanded="false">
+            <nav class="flex flex-col space-y-3 px-6 text-h-dark">
+                <a href="index2.html" class="font-medium border-b border-gray-100 pb-2">Home</a>
+                <a href="about3.html" class="font-medium border-b border-gray-100 pb-2">About</a>
+                <a href="program3.html" class="font-medium border-b border-gray-100 pb-2">Programs</a>
+                <a href="events1.html" class="font-bold border-b border-h-neon pb-2 text-h-dark">Events</a>
+                <a href="educators1.html" class="font-medium border-b border-gray-100 pb-2">For Educators</a> 
+                <a href="#" class="text-h-body font-medium pt-2">Contact</a>
+                <a href="#" class="text-h-body font-medium">Join Now</a>
+                <a href="#" class="text-h-body font-medium">Login</a>
+                <a href="#" class="bg-hustle-gradient text-white text-center px-5 py-2.5 rounded-btn-full font-semibold mt-4">Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section (High-Conversion) -->
+        <section class="hero-bg container mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 text-center pt-20 pb-24 lg:pt-32 lg:pb-40 fade-in-section" 
+                 style="min-height: 50vh;" aria-label="Event Hero">
+            <div class="max-w-4xl mx-auto space-y-6">
+                
+                <h1 class="font-poppins text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-h-dark">
+                    <span class="text-hustle-gradient block text-[48px] lg:text-[64px] font-extrabold uppercase tracking-widest leading-none">
+                        Learn. Compete. Launch.
+                    </span>
+                    <span class="mt-2 block text-h-dark text-4xl lg:text-5xl">Join HustleIn events and turn ideas into impact.</span>
+                </h1>
+                
+                <p class="text-xl max-w-3xl mx-auto text-h-body pt-2">
+                    **Real skills. Real stages. Real funding.** Show up, shine, and ship your idea. Events are the momentum engines that accelerate your skill, confidence, and network.
+                </p>
+                
+                <!-- Call-to-Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
+                    <a href="#events-grid" class="bg-hustle-gradient text-white px-8 py-3 rounded-btn-full text-lg font-bold shadow-xl shadow-[rgba(37,117,252,0.2)] hover:scale-[1.05] transition duration-300 uppercase">
+                        Register for Events
+                    </a>
+                    <a href="#events-grid" class="text-h-body px-8 py-3 rounded-btn-full text-lg font-bold border-2 border-h-body hover:border-h-neon hover:text-h-neon transition duration-300 uppercase">
+                        View All Schedules
+                    </a>
+                </div>
+
+                <!-- Quick Links Pills (Accessibility/Navigation) -->
+                <div class="flex flex-wrap justify-center space-x-3 text-sm pt-8">
+                    <a href="#innovatex" class="py-1.5 px-4 rounded-full bg-white/70 hover:bg-h-neon/10 text-h-body hover:text-h-neon transition duration-200 shadow-sm border border-gray-100">#InnovateX</a>
+                    <a href="#idearise" class="py-1.5 px-4 rounded-full bg-white/70 hover:bg-h-neon/10 text-h-body hover:text-h-neon transition duration-200 shadow-sm border border-gray-100">#IdeaRise</a>
+                    <a href="#pitchup" class="py-1.5 px-4 rounded-full bg-white/70 hover:bg-h-neon/10 text-h-body hover:text-h-neon transition duration-200 shadow-sm border border-gray-100">#PitchUp</a>
+                    <a href="#launchpad" class="py-1.5 px-4 rounded-full bg-white/70 hover:bg-h-neon/10 text-h-body hover:text-h-neon transition duration-200 shadow-sm border border-gray-100">#LaunchPad</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. Events Grid Section -->
+        <section id="events-grid" class="container mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="font-poppins text-3xl sm:text-4xl font-extrabold text-h-dark mb-4">
+                    Flagship HustleIn Events — Where Ideas Meet Action
+                </h2>
+                <p class="text-lg max-w-4xl mx-auto text-h-body">
+                    Every event is a stage — build, pitch, or battle your way to resources, mentorship, and real-world results. Join a community that rewards **hustle with opportunity.**
+                </p>
+            </div>
+            
+            <!-- Events Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: InnovateX - Hackathon -->
+                <article id="innovatex" class="glass-effect p-8 rounded-card hover:scale-[1.01] transition duration-300 fade-in-section" style="transition-delay: 0ms;">
+                    <span class="inline-block py-1 px-3 mb-4 rounded-full text-sm font-bold bg-h-neon/10 text-h-neon">Hackathon</span>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <i data-lucide="rocket" class="w-16 h-16 text-hustle-gradient mb-4"></i>
+                        <h3 class="font-poppins text-2xl font-bold text-h-dark mb-2">InnovateX</h3>
+                        <p class="text-sm font-medium text-h-body mb-2">Oct 25–27, 2025 · Online</p>
+                        
+                        <p class="text-base text-h-body mb-6">
+                            **Build fast. Ship early.** Win mentorship, cloud credits, and prize money that fuels your first prototype.
+                        </p>
+
+                        <div class="bg-h-base/50 text-xs text-h-dark font-semibold py-1 px-3 rounded-full mb-4">
+                            Tag: Build · Prototype · Win
+                        </div>
+                        
+                        <div class="flex justify-center space-x-3 w-full">
+                            <a href="#" class="bg-hustle-gradient text-white px-5 py-2 rounded-btn-full text-sm font-semibold hover:opacity-90 flex-1">
+                                Register for InnovateX
+                            </a>
+                            <button class="text-h-body border border-h-body/50 hover:border-h-neon hover:text-h-neon px-5 py-2 rounded-btn-full text-sm font-semibold transition details-btn" data-event="InnovateX">
+                                Details
+                            </button>
+                        </div>
+                        <span class="mt-3 text-xs text-h-neon font-bold">50 seats left! (Scarcity)</span>
+                    </div>
+                </article>
+
+                <!-- Card 2: IdeaRise - Ideathon -->
+                <article id="idearise" class="glass-effect p-8 rounded-card hover:scale-[1.01] transition duration-300 fade-in-section" style="transition-delay: 50ms;">
+                    <span class="inline-block py-1 px-3 mb-4 rounded-full text-sm font-bold bg-h-neon/10 text-h-neon">Ideathon</span>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <i data-lucide="lightbulb-off" class="w-16 h-16 text-hustle-gradient mb-4"></i>
+                        <h3 class="font-poppins text-2xl font-bold text-h-dark mb-2">IdeaRise</h3>
+                        <p class="text-sm font-medium text-h-body mb-2">Nov 15, 2025 · Virtual</p>
+                        
+                        <p class="text-base text-h-body mb-6">
+                            Refine your idea, validate customer pain, and **pitch to experts who can help you scale.**
+                        </p>
+
+                        <div class="bg-h-base/50 text-xs text-h-dark font-semibold py-1 px-3 rounded-full mb-4">
+                            Tag: Ideate · Validate · Network
+                        </div>
+                        
+                        <div class="flex justify-center space-x-3 w-full">
+                            <a href="#" class="bg-hustle-gradient text-white px-5 py-2 rounded-btn-full text-sm font-semibold hover:opacity-90 flex-1">
+                                Pitch Your Idea
+                            </a>
+                            <button class="text-h-body border border-h-body/50 hover:border-h-neon hover:text-h-neon px-5 py-2 rounded-btn-full text-sm font-semibold transition details-btn" data-event="IdeaRise">
+                                Details
+                            </button>
+                        </div>
+                        <span class="mt-3 text-xs text-h-neon font-bold">Applications close in 14 days</span>
+                    </div>
+                </article>
+
+                <!-- Card 3: PitchUp - Investor Pitch Day -->
+                <article id="pitchup" class="glass-effect p-8 rounded-card hover:scale-[1.01] transition duration-300 fade-in-section" style="transition-delay: 100ms;">
+                    <span class="inline-block py-1 px-3 mb-4 rounded-full text-sm font-bold bg-h-neon/10 text-h-neon">Pitch Day</span>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <i data-lucide="trending-up" class="w-16 h-16 text-hustle-gradient mb-4"></i>
+                        <h3 class="font-poppins text-2xl font-bold text-h-dark mb-2">PitchUp</h3>
+                        <p class="text-sm font-medium text-h-body mb-2">Dec 10, 2025 · Hybrid</p>
+                        
+                        <p class="text-base text-h-body mb-6">
+                            Nail your pitch in front of **real investors**. Get straight feedback, direct intros, and the chance to secure seed funding.
+                        </p>
+
+                        <div class="bg-h-base/50 text-xs text-h-dark font-semibold py-1 px-3 rounded-full mb-4">
+                            Tag: Pitch · Fund · Mentor
+                        </div>
+                        
+                        <div class="flex justify-center space-x-3 w-full">
+                            <a href="#" class="bg-hustle-gradient text-white px-5 py-2 rounded-btn-full text-sm font-semibold hover:opacity-90 flex-1">
+                                Apply to Pitch
+                            </a>
+                            <button class="text-h-body border border-h-body/50 hover:border-h-neon hover:text-h-neon px-5 py-2 rounded-btn-full text-sm font-semibold transition details-btn" data-event="PitchUp">
+                                Details
+                            </button>
+                        </div>
+                        <span class="mt-3 text-xs text-h-neon font-bold">Only 12 pitching slots available!</span>
+                    </div>
+                </article>
+                
+                <!-- Card 4: LaunchPad - Startup Accelerator -->
+                <article id="launchpad" class="glass-effect p-8 rounded-card hover:scale-[1.01] transition duration-300 md:col-span-2 lg:col-span-1 fade-in-section" style="transition-delay: 150ms;">
+                    <span class="inline-block py-1 px-3 mb-4 rounded-full text-sm font-bold bg-h-neon/10 text-h-neon">Accelerator</span>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <i data-lucide="briefcase-business" class="w-16 h-16 text-hustle-gradient mb-4"></i>
+                        <h3 class="font-poppins text-2xl font-bold text-h-dark mb-2">LaunchPad</h3>
+                        <p class="text-sm font-medium text-h-body mb-2">Jan 2026 · Offline</p>
+                        
+                        <p class="text-base text-h-body mb-6">
+                            A launchpad for teams ready to scale. Intensive mentorship, growth sprints, and **demo days that attract real customers and partners.**
+                        </p>
+
+                        <div class="bg-h-base/50 text-xs text-h-dark font-semibold py-1 px-3 rounded-full mb-4">
+                            Tag: Accelerate · Launch · Scale
+                        </div>
+                        
+                        <div class="flex justify-center space-x-3 w-full">
+                            <a href="#" class="bg-hustle-gradient text-white px-5 py-2 rounded-btn-full text-sm font-semibold hover:opacity-90 flex-1">
+                                Apply to Launch
+                            </a>
+                            <button class="text-h-body border border-h-body/50 hover:border-h-neon hover:text-h-neon px-5 py-2 rounded-btn-full text-sm font-semibold transition details-btn" data-event="LaunchPad">
+                                Details
+                            </button>
+                        </div>
+                        <span class="mt-3 text-xs text-h-neon font-bold">Cohort selection underway.</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- 3. Motivational Banner -->
+        <section class="container mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-hustle-gradient rounded-[20px] p-8 lg:p-12 text-white text-center fade-in-section">
+                <p class="font-poppins text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+                    Show up. Hustle hard. Get noticed.
+                </p>
+                <p class="text-lg max-w-3xl mx-auto mb-6">
+                    Events are momentum engines — they accelerate your skill, confidence, and network. **Don’t wait for permission — create it.**
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#events-grid" class="bg-white text-h-dark px-6 py-3 rounded-btn-full font-bold shadow-lg hover:scale-[1.05] transition duration-300">
+                        See Upcoming Events
+                    </a>
+                    <a href="#" class="text-white hover:underline px-6 py-3 font-medium">Sponsor an Event →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Testimonials/Winners Strip (Placeholder Carousel) -->
+        <section class="container mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-16">
+            <h3 class="font-poppins text-2xl font-bold text-h-dark text-center mb-8 fade-in-section">
+                What Our Winners Say
+            </h3>
+            
+            <div class="flex overflow-x-auto space-x-6 pb-4 fade-in-section">
+                <!-- Testimonial 1 -->
+                <div class="glass-effect p-6 rounded-card min-w-[300px] flex-shrink-0 hover:shadow-lg transition duration-300">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://placehold.co/40x40/6A11CB/ffffff?text=R" onerror="this.src='https://placehold.co/40x40/6A11CB/ffffff?text=R'" alt="Riya Avatar" class="rounded-full w-10 h-10">
+                        <div>
+                            <p class="font-bold text-h-dark">Riya, Founder</p>
+                            <span class="text-xs text-h-neon font-semibold">PitchUp Winner 2024</span>
+                        </div>
+                    </div>
+                    <p class="italic text-h-body">
+                        "I pitched at PitchUp and raised pre-seed — HustleIn turned our idea into a company."
+                    </p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-effect p-6 rounded-card min-w-[300px] flex-shrink-0 hover:shadow-lg transition duration-300">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://placehold.co/40x40/2575FC/ffffff?text=J" onerror="this.src='https://placehold.co/40x40/2575FC/ffffff?text=J'" alt="Josh Avatar" class="rounded-full w-10 h-10">
+                        <div>
+                            <p class="font-bold text-h-dark">Josh, Student</p>
+                            <span class="text-xs text-h-neon font-semibold">InnovateX Participant</span>
+                        </div>
+                    </div>
+                    <p class="italic text-h-body">
+                        "The fastest I've ever learned a new framework. The pressure makes you perform."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="glass-effect p-6 rounded-card min-w-[300px] flex-shrink-0 hover:shadow-lg transition duration-300">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://placehold.co/40x40/FF007A/ffffff?text=M" onerror="this.src='https://placehold.co/40x40/FF007A/ffffff?text=M'" alt="Mei Avatar" class="rounded-full w-10 h-10">
+                        <div>
+                            <p class="font-bold text-h-dark">Mei, Mentor</p>
+                            <span class="text-xs text-h-neon font-semibold">Venture Partner</span>
+                        </div>
+                    </div>
+                    <p class="italic text-h-body">
+                        "The quality of ideas at IdeaRise is genuinely industry-level. Highly recommended."
+                    </p>
+                </div>
+                
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 5. Footer -->
+    <footer class="bg-[#1E293B] pt-12 pb-8">
+        <div class="container mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 border-b border-slate-700 pb-8">
+                
+                <!-- Col 1: HustleIn Info -->
+                <div class="col-span-2 md:col-span-1 space-y-3">
+                    <a href="#" class="text-2xl font-poppins font-bold text-white">
+                        HustleIn
+                    </a>
+                    <p class="text-sm text-slate-400">Learn. Earn. Innovate.</p>
+                </div>
+
+                <!-- Col 2: Events Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-white">Events</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#innovatex" class="hover:text-h-neon">InnovateX</a></li>
+                        <li><a href="#idearise" class="hover:text-h-neon">IdeaRise</a></li>
+                        <li><a href="#pitchup" class="hover:text-h-neon">PitchUp</a></li>
+                        <li><a href="#launchpad" class="hover:text-h-neon">LaunchPad</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Resources -->
+                <div>
+                    <h4 class="font-semibold mb-3 text-white">Resources</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-h-neon">Blog</a></li>
+                        <li><a href="#" class="hover:text-h-neon">Support</a></li>
+                        <li><a href="#" class="hover:text-h-neon">Sponsors</a></li>
+                        <li><a href="#" class="hover:text-h-neon">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Col 4/5: Contact & Newsletter -->
+                <div class="col-span-2">
+                    <h4 class="font-semibold mb-3 text-white">Join Our Newsletter</h4>
+                    <form class="flex space-x-2">
+                        <input type="email" placeholder="Your email" class="flex-grow p-3 rounded-xl text-h-dark focus:ring-h-neon focus:border-h-neon" required>
+                        <button type="submit" class="bg-hustle-gradient text-white px-5 py-3 rounded-xl font-bold hover:opacity-90 transition duration-200">
+                            Subscribe
+                        </button>
+                    </form>
+                    <p class="mt-4 text-xs text-slate-400">Get event updates and exclusive mentorship tips.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-4 text-center text-xs text-slate-400">
+                © 2025 HustleIn. All Rights Reserved. | Privacy Policy | Terms of Service
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- 6. Floating Chat Assistant (HustleBot) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <!-- Chat Button -->
+        <button id="chat-button" class="p-4 rounded-full shadow-xl bg-hustle-gradient text-white w-16 h-16 hover:scale-110 transition-transform duration-300 border-4 border-white/50" aria-label="Open HustleBot Chat">
+            <i data-lucide="message-square-text" class="w-7 h-7"></i>
+        </button>
+
+        <!-- Chat Popup (Glassmorphic) -->
+        <div id="chatbot-popup" class="absolute glass-effect rounded-chat shadow-2xl p-4 border border-gray-100">
+            <div class="flex justify-between items-center mb-3 border-b pb-2 border-gray-100">
+                <h3 class="font-poppins text-xl font-bold text-hustle-gradient">HustleBot 💬 <span class="text-xs ml-2 py-0.5 px-2 bg-h-neon/10 text-h-neon rounded-full font-inter font-medium">AI Assist</span></h3>
+                <button id="close-chat-btn" class="text-h-dark hover:text-h-neon p-1 rounded-full" aria-label="Close Chat"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            
+            <p class="text-sm mb-4 text-h-body">
+                Ready to rise? Tell me your goal — I’ll match you to the perfect event.
+            </p>
+
+            <div class="space-y-2 mb-4">
+                <button class="w-full text-left py-2 px-3 rounded-lg bg-h-base/70 text-h-dark text-sm hover:bg-h-neon/10 transition">Which event fits me?</button>
+                <button class="w-full text-left py-2 px-3 rounded-lg bg-h-base/70 text-h-dark text-sm hover:bg-h-neon/10 transition">How to pitch?</button>
+                <button class="w-full text-left py-2 px-3 rounded-lg bg-h-base/70 text-h-dark text-sm hover:bg-h-neon/10 transition">Sponsorship info</button>
+                <button class="w-full text-left py-2 px-3 rounded-lg bg-h-base/70 text-h-dark text-sm hover:bg-h-neon/10 transition">Register me</button>
+            </div>
+
+            <div class="w-full h-8 bg-gray-100 rounded-lg flex items-center px-3 text-sm text-h-body/70 mt-2">
+                Type your question...
+            </div>
+            <p class="text-[10px] text-center text-h-body/50 mt-3">Powered by HustleIn Agentic AI</p>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            // --- Navbar Mobile Toggle ---
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = mobileBtn.querySelector('i');
+
+            mobileBtn.addEventListener('click', () => {
+                const isExpanded = mobileMenu.style.display === 'flex';
+                mobileMenu.style.display = isExpanded ? 'none' : 'flex';
+                mobileMenu.setAttribute('aria-expanded', !isExpanded);
+                
+                // Animate hamburger to X
+                if (isExpanded) {
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                } else {
+                    menuIcon.setAttribute('data-lucide', 'x');
+                }
+                lucide.createIcons();
+            });
+
+            // --- Chatbot Toggle ---
+            const chatButton = document.getElementById('chat-button');
+            const chatPopup = document.getElementById('chatbot-popup');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+
+            chatButton.addEventListener('click', () => {
+                chatPopup.classList.toggle('open');
+                // Placeholder for setting/checking localStorage state for unread notification/closed state
+            });
+            
+            closeChatBtn.addEventListener('click', () => {
+                chatPopup.classList.remove('open');
+            });
+
+
+            // --- Scroll Animation (Intersection Observer) ---
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            // Apply observer to all elements with the 'fade-in-section' class
+            document.querySelectorAll('.fade-in-section').forEach((element, index) => {
+                // Apply staggered delay to event cards
+                if (element.id === 'innovatex' || element.id === 'idearise' || element.id === 'pitchup' || element.id === 'launchpad') {
+                     element.style.transitionDelay = `${index * 50}ms`;
+                }
+                observer.observe(element);
+            });
+            
+            // --- Modal Placeholder Logic ---
+            // In a real application, clicking 'Details' would open a modal with event info.
+            document.querySelectorAll('.details-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const eventName = e.target.getAttribute('data-event');
+                    console.log(`Opening modal for: ${eventName}`);
+                    // In a real app: create/show the glassmorphic modal here with ARIA roles.
+                });
+            });
+        });
+    </script>
+</body>
+</html>

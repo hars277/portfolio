@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Hustle In – Empowering Youth</title>
+    <!-- Load Inter and Poppins Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* --- CSS Variables (Light Mode Only) --- */
+        :root {
+            /* Colors */
+            --bg-main: #F5F7FA; 
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A; /* Dark Navy */
+            --text-sub: #334155; /* Slate Gray */
+            --accent-purple: #6A11CB;
+            --accent-blue: #2575FC;
+            --accent-pink: #FF007A; 
+            --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Define the custom fonts */
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Apply base background and text colors */
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7; /* Enhanced readability */
+        }
+
+        /* Hero Text Gradient (Purple to Blue) */
+        .text-hustle-gradient {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Button Gradient (Purple to Pink) */
+        .bg-btn-gradient {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+        }
+
+        /* Card styles for clean look */
+        .feature-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            /* Soft gradient border effect on hover */
+            border-image: linear-gradient(45deg, var(--accent-purple), var(--accent-blue)) 1;
+            box-shadow: 0 15px 35px rgba(106, 17, 203, 0.1);
+        }
+
+        /* Scroll Animation Classes */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Icon Styling (for gradient look) */
+        .icon-gradient {
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem; /* Larger icons */
+        }
+
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    borderRadius: {
+                        'hero': '32px',
+                        'card': '24px',
+                        'btn-lg': '30px',
+                    },
+                    colors: {
+                        'p-main': 'var(--text-main)',
+                        'p-sub': 'var(--text-sub)',
+                        'accent-pink': 'var(--accent-pink)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Main Content Wrapper -->
+    <main class="py-20">
+        <div class="container mx-auto px-4 max-w-7xl">
+
+            <!-- 1. Hero Section -->
+            <section class="text-center pb-20 pt-10 slide-up">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="font-poppins text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4">
+                        <span class="text-hustle-gradient">Empowering Youth.</span> Building Futures.
+                    </h1>
+                    <p class="text-lg md:text-xl max-w-3xl mx-auto" style="color: var(--text-sub);">
+                        We’re building the world’s first youth empowerment platform where **learning meets innovation** and dreams turn into startups. Join the digital ecosystem designed for **Gen Z ambition**.
+                    </p>
+                </div>
+                
+                <!-- Hero Buttons -->
+                <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#" class="bg-btn-gradient text-white px-8 py-4 rounded-btn-lg text-lg font-bold shadow-lg shadow-[rgba(106,17,203,0.2)] hover:scale-[1.03] transition duration-300">
+                        Start Learning
+                        <i data-lucide="zap" class="w-5 h-5 inline-block ml-2"></i>
+                    </a>
+                    
+                    <a href="#" class="px-8 py-4 rounded-btn-lg text-lg font-bold border-2 border-p-main hover:bg-p-main hover:text-white transition duration-300" 
+                       style="color: var(--text-main); border-color: var(--text-main);"
+                       onmouseover="this.style.borderColor='var(--accent-pink)'; this.style.color='var(--accent-pink)'"
+                       onmouseout="this.style.borderColor='var(--text-main)'; this.style.color='var(--text-main)'">
+                        Join as Freelancer
+                        <i data-lucide="briefcase" class="w-5 h-5 inline-block ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Placeholder Illustration -->
+                <div class="mt-16 mx-auto max-w-5xl h-64 bg-white rounded-hero border border-border-color shadow-xl p-6 flex items-center justify-center text-p-sub/70 text-sm italic">
+                    <!-- Placeholder for modern 3D illustration: students, rocket, laptop, AI bot -->
+                    
+                </div>
+            </section>
+            
+            <div class="border-t border-border-color my-16"></div>
+
+            <!-- 2. About HustleIn (Mission Block) -->
+            <section id="mission" class="py-10 slide-up">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left: Text Content -->
+                    <div class="space-y-6">
+                        <h2 class="font-poppins text-4xl font-extrabold" style="color: var(--text-main);">
+                            Who We Are: The Revolution for Young Minds
+                        </h2>
+                        <p class="text-lg" style="color: var(--text-sub);">
+                            HustleIn is not just a platform — it’s a **revolution** for young minds. We bring together **learning, earning, and innovation** into a single, vibrant ecosystem where your ideas grow and your career begins. Our psychology-driven approach ensures every user feels motivated, supported, and ready to take action.
+                        </p>
+                        <p class="text-lg font-semibold" style="color: var(--text-sub);">
+                            From **internships to ideathons**, from freelancing to startup funding, we provide the tools and community to help every student find their own unique success path and **build their future, today.**
+                        </p>
+                    </div>
+
+                    <!-- Right: Floating Icon Illustration -->
+                    <div class="relative min-h-[300px] flex items-center justify-center bg-white rounded-card shadow-lg p-6 border border-border-color">
+                        <div class="icon-gradient absolute top-8 left-8 p-3 bg-p-main/5 rounded-full"><i data-lucide="award"></i></div>
+                        <div class="icon-gradient absolute bottom-10 right-10 p-3 bg-p-main/5 rounded-full"><i data-lucide="wallet"></i></div>
+                        <div class="icon-gradient absolute top-1/2 left-1/4 p-3 bg-p-main/5 rounded-full"><i data-lucide="book-open"></i></div>
+                        
+                        <div class="text-center">
+                            <i data-lucide="globe-lock" class="icon-gradient w-16 h-16"></i>
+                            <p class="mt-4 text-p-sub font-poppins font-bold">The All-In-One Ecosystem</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="border-t border-border-color my-16"></div>
+
+            <!-- 3. Feature Highlights (Ecosystem Cards) -->
+            <section id="features" class="py-10 slide-up">
+                <h2 class="font-poppins text-4xl font-extrabold text-center mb-16" style="color: var(--text-main);">
+                    The HustleIn Ecosystem: Six Pillars of Growth
+                </h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1: Learn & Grow -->
+                    <div class="feature-card p-8 rounded-card space-y-3">
+                        <i data-lucide="school" class="icon-gradient w-10 h-10" style="color: var(--accent-purple);"></i>
+                        <h3 class="font-poppins text-xl font-bold" style="color: var(--text-main);">Learn & Grow</h3>
+                        <p class="text-p-sub text-base">Gain trending skills, complete micro-certifications, and master job-ready skills in AI, coding, and design to elevate your profile.</p>
+                    </div>
+                    
+                    <!-- Card 2: Work & Earn -->
+                    <div class="feature-card p-8 rounded-card space-y-3">
+                        <i data-lucide="dollar-sign" class="icon-gradient w-10 h-10" style="color: var(--accent-blue);"></i>
+                        <h3 class="font-poppins text-xl font-bold" style="color: var(--text-main);">Work & Earn</h3>
+                        <p class="text-p-sub text-base">Get real internships, apply for placements, and access a thriving project hub to start freelancing and generating income immediately.</p>
+                    </div>
+
+                    <!-- Card 3: Innovate & Build -->
+                    <div class="feature-card p-8 rounded-card space-y-3">
+                        <i data-lucide="rocket" class="icon-gradient w-10 h-10" style="color: var(--accent-pink);"></i>
+                        <h3 class="font-poppins text-xl font-bold" style="color: var(--text-main);">Innovate & Build</h3>
+                        <p class="text-p-sub text-base">Pitch your revolutionary ideas in Ideathons, win seed funding, and receive mentorship to successfully launch and scale your startup.</p>
+                    </div>
+                    
+                    <!-- Card 4: Empower & Lead -->
+                    <div class="feature-card p-8 rounded-card space-y-3">
+                        <i data-lucide="users" class="icon-gradient w-10 h-10" style="color: var(--accent-blue);"></i>
+                        <h3 class="font-poppins text-xl font-bold" style="color: var(--text-main);">Empower & Lead</h3>
+                        <p class="text-p-sub text-base">Educators and professionals can become mentors, create courses, and inspire the next generation, earning income in the process.</p>
+                    </div>
+
+                    <!-- Card 5: Compete & Win -->
+                    <div class="feature-card p-8 rounded-card space-y-3">
+                        <i data-lucide="trophy" class="icon-gradient w-10 h-10" style="color: var(--accent-pink);"></i>
+                        <h3 class="font-poppins text-xl font-bold" style="color: var(--text-main);">Compete & Win</h3>
+                        <p class="text-p-sub text-base">Join national-level hackathons, Olympiad preps, GK quizzes, and competitive online gaming tournaments to test your limits.</p>
+                    </div>
+                    
+                    <!-- Card 6: Explore & Achieve (AI) -->
+                    <div class="feature-card p-8 rounded-card space-y-3">
+                        <i data-lucide="cpu" class="icon-gradient w-10 h-10" style="color: var(--accent-purple);"></i>
+                        <h3 class="font-poppins text-xl font-bold" style="color: var(--text-main);">Explore & Achieve</h3>
+                        <p class="text-p-sub text-base">Utilize **Agentic AI tools** for personalized career guidance, resource matching, and fast-track learning paths to maximize success.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="border-t border-border-color my-16"></div>
+
+            <!-- 4. Impact Section (Counters) -->
+            <section id="impact" class="py-16 slide-up" style="background: rgba(106,17,203,0.02);">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h2 class="font-poppins text-4xl font-extrabold mb-12" style="color: var(--text-main);">
+                        Real Impact. Real Growth.
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Counter 1: Youth Empowered -->
+                        <div class="p-6 bg-white rounded-card shadow-md">
+                            <i data-lucide="trending-up" class="icon-gradient w-10 h-10 mb-3" style="color: var(--accent-purple);"></i>
+                            <p class="font-poppins text-4xl font-bold count-number" data-target="20000" style="color: var(--accent-purple);">0</p>
+                            <p class="text-p-sub font-semibold mt-1">Youth Empowered</p>
+                        </div>
+                        
+                        <!-- Counter 2: Internships Completed -->
+                        <div class="p-6 bg-white rounded-card shadow-md">
+                            <i data-lucide="check-circle" class="icon-gradient w-10 h-10 mb-3" style="color: var(--accent-blue);"></i>
+                            <p class="font-poppins text-4xl font-bold count-number" data-target="1000" style="color: var(--accent-blue);">0</p>
+                            <p class="text-p-sub font-semibold mt-1">Internships Completed</p>
+                        </div>
+
+                        <!-- Counter 3: Startups Funded -->
+                        <div class="p-6 bg-white rounded-card shadow-md">
+                            <i data-lucide="briefcase-business" class="icon-gradient w-10 h-10 mb-3" style="color: var(--accent-pink);"></i>
+                            <p class="font-poppins text-4xl font-bold count-number" data-target="50" style="color: var(--accent-pink);">0</p>
+                            <p class="text-p-sub font-semibold mt-1">Startups Funded</p>
+                        </div>
+
+                    </div>
+
+                    <p class="text-xl font-semibold mt-10" style="color: var(--text-main);">
+                        Every number represents a dream turned into reality. Your success is our metric.
+                    </p>
+                </div>
+            </section>
+            
+            <div class="border-t border-border-color my-16"></div>
+
+            <!-- 5. Quote Section -->
+            <section class="text-center py-10 slide-up">
+                <div class="max-w-4xl mx-auto">
+                    <div class="w-1/3 h-1 mx-auto mb-6 bg-btn-gradient rounded-full opacity-50"></div>
+                    <p class="font-inter text-xl md:text-2xl italic font-medium" style="color: #64748B;">
+                        “At HustleIn, we don’t just teach skills — we build futures.”
+                    </p>
+                    <div class="w-1/3 h-1 mx-auto mt-6 bg-btn-gradient rounded-full opacity-50"></div>
+                </div>
+            </section>
+            
+        </div>
+    </main>
+
+    <!-- 6. Call-to-Action (CTA) Section - Full Width -->
+    <section id="cta" class="py-20 text-center text-white bg-btn-gradient slide-up">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <h2 class="font-poppins text-3xl md:text-4xl font-extrabold mb-8">
+                Join the Revolution of Youth Empowerment 🚀
+            </h2>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                
+                <a href="#" class="bg-white px-10 py-4 rounded-btn-lg text-lg font-bold hover:scale-[1.05] transition duration-300" style="color: var(--accent-pink);">
+                    Start Your Journey
+                    <i data-lucide="sparkles" class="w-5 h-5 inline-block ml-2"></i>
+                </a>
+                
+                <a href="#" class="px-10 py-4 rounded-btn-lg text-lg font-bold border-2 border-white hover:bg-white hover:text-p-main transition duration-300" style="color: white;">
+                    Partner With Us
+                    <i data-lucide="handshake" class="w-5 h-5 inline-block ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="bg-p-main py-12 text-white">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-8 text-sm">
+                <!-- Branding -->
+                <div class="col-span-2 md:col-span-2 space-y-3">
+                    <h3 class="font-poppins text-xl font-bold">HustleIn</h3>
+                    <p class="text-gray-400">Empowering Youth. Building Futures. The all-in-one ecosystem for Gen Z.</p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h4 class="font-semibold mb-3 uppercase text-accent-pink">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Press & Media</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 uppercase text-accent-pink">Ecosystem</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Courses</a></li>
+                        <li><a href="#" class="hover:text-white">Hire Interns</a></li>
+                        <li><a href="#" class="hover:text-white">Startup Portal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 uppercase text-accent-pink">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                        <li><a href="#" class="hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="hover:text-white">TOS & Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3 uppercase text-accent-pink">Connect</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Twitter</a></li>
+                        <li><a href="#" class="hover:text-white">LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-white">Discord</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-gray-700 text-center text-xs text-gray-400">
+                © 2025 HustleIn | Learn. Earn. Innovate. | All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // --- Scroll Animation Logic (Intersection Observer) ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        if (entry.target.id === 'impact') {
+                            animateCounters();
+                        }
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the item is visible
+            });
+
+            // Apply observer to all elements with the 'slide-up' class
+            document.querySelectorAll('.slide-up').forEach(element => {
+                observer.observe(element);
+            });
+            
+            // --- Impact Counter Animation Logic ---
+            function animateCounters() {
+                const counters = document.querySelectorAll('.count-number');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let current = 0;
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 10); // Calculate increment based on duration
+
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.textContent = Math.ceil(current).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString() + (target >= 1000 ? '+' : ''); // Add '+' for 1000+
+                        }
+                    };
+                    updateCounter();
+                });
+            }
+
+            // --- Floating AI Assistant Button (Placeholder) ---
+            const chatButton = document.createElement('button');
+            chatButton.id = 'chat-button';
+            chatButton.className = 'fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300';
+            chatButton.style.cssText = `
+                background-color: var(--accent-pink); 
+                color: white; 
+                box-shadow: 0 4px 15px var(--accent-pink, 0.5);
+            `;
+            chatButton.innerHTML = '<i data-lucide="bot" class="w-7 h-7"></i>';
+            document.body.appendChild(chatButton);
+            lucide.createIcons(); // Re-create icons for the dynamically added button
+
+            chatButton.addEventListener('click', () => {
+                console.log("AI Career Assistant launched!");
+                // Using an alternative message box instead of alert()
+                const message = "AI Career Assistant is ready! (Placeholder: Click 'Start Your Journey' for the main platform experience.)";
+                const tempMessage = document.createElement('div');
+                tempMessage.textContent = message;
+                tempMessage.style.cssText = `
+                    position: fixed; bottom: 100px; right: 20px;
+                    background-color: var(--accent-purple); color: white;
+                    padding: 15px; border-radius: 8px; z-index: 1000;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                    opacity: 1; transition: opacity 0.5s;
+                    font-family: 'Inter', sans-serif;
+                `;
+                document.body.appendChild(tempMessage);
+                setTimeout(() => {
+                    tempMessage.style.opacity = '0';
+                    setTimeout(() => tempMessage.remove(), 500);
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
